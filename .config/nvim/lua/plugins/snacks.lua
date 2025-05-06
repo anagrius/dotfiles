@@ -15,6 +15,14 @@ return {
           ]],
         },
       },
+      picker = {
+        sources = {
+          explorer = {
+            ignored = true,
+            hidden = true,
+          },
+        },
+      },
     },
     dependencies = {},
   },
