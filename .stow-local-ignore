@@ -1,0 +1,7 @@
+\.git
+\.gitignore
+git-hooks/
+
+README.md
+git.md
+install.sh

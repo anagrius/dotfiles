@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Pre-push hook to run git-leaks scan before pushing to remote repository
+# This hook prevents accidental leakage of sensitive information
+
+set -euo pipefail
+
+echo "Running git-leaks scan to check for sensitive information..."
+
+# Check if git-leaks is installed
+if ! command -v gitleaks &> /dev/null; then
+    echo "Error: git-leaks is not installed. Please install it first."
+    echo "Installation instructions: https://github.com/gitleaks/gitleaks#installing"
+    exit 1
+fi
+
+# Run git-leaks to detect secrets
+GITLEAKS_OUTPUT=$(gitleaks detect --verbose)
+
+# Check if git-leaks found any secrets
+if [ $? -ne 0 ]; then
+    echo "❌ git-leaks detected potential secrets in your changes!"
+    echo "$GITLEAKS_OUTPUT"
+    echo "Push rejected. Please remove sensitive data before pushing."
+    exit 1
+else
+    echo "✅ No sensitive information detected. Proceeding with push..."
+fi
+
+exit 0
