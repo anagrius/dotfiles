@@ -105,3 +105,9 @@ source ~/.asdf/asdf.sh
 export PATH="$PATH:/home/anagrius/.local/bin"
 
 alias lg='lazygit'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+alias claude="/home/anagrius/.claude/local/claude"

@@ -1,0 +1,30 @@
+# Ghostty Terminal Configuration
+
+# Split pane keyboard shortcuts
+# Create splits
+keybind = ctrl+x>2=new_split:right
+keybind = ctrl+x>3=new_split:down
+
+# Navigate between split panes
+keybind = super+left=goto_split:left
+keybind = super+right=goto_split:right
+keybind = super+up=goto_split:top
+keybind = super+down=goto_split:bottom
+
+# Alternative navigation with Ctrl+Shift+Arrow
+keybind = ctrl+shift+left=goto_split:left
+keybind = ctrl+shift+right=goto_split:right
+keybind = ctrl+shift+up=goto_split:top
+keybind = ctrl+shift+down=goto_split:bottom
+
+# Resize splits
+keybind = ctrl+super+left=resize_split:left,10
+keybind = ctrl+super+right=resize_split:right,10
+keybind = ctrl+super+up=resize_split:up,10
+keybind = ctrl+super+down=resize_split:down,10
+
+# Close current split/pane
+keybind = ctrl+x>0=close_surface
+
+# Focus pane with mouse
+mouse-shift-capture = true
