@@ -1,0 +1,2 @@
+# Ignore firmware files (download fresh from my.glove80.com)
+*.uf2
