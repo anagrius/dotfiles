@@ -98,11 +98,11 @@ flash_half() {
     echo "  3. The keyboard half will disconnect and remount as ${BOLD}${device}${NC}"
     echo ""
 
-    if [[ "$side" == "RIGHT" ]]; then
-        print_warning "Make sure the ${BOLD}RIGHT${NC} half is connected via USB"
+    if [[ "$side" == "LEFT" ]]; then
+        print_warning "Make sure the ${BOLD}LEFT${NC} half is connected via USB"
     else
-        print_warning "Disconnect the RIGHT half"
-        print_warning "Connect the ${BOLD}LEFT${NC} half via USB"
+        print_warning "Disconnect the LEFT half"
+        print_warning "Connect the ${BOLD}RIGHT${NC} half via USB"
     fi
 
     echo ""
@@ -149,11 +149,11 @@ main() {
     echo ""
     read -p "Press ENTER to continue or Ctrl+C to abort..."
 
-    # Flash right half first (typically connected)
-    flash_half "RIGHT" "GLV80RHBOOT" "$firmware"
-
-    # Flash left half
+    # Flash left half first
     flash_half "LEFT" "GLV80LHBOOT" "$firmware"
+
+    # Flash right half
+    flash_half "RIGHT" "GLV80RHBOOT" "$firmware"
 
     # Factory reset instructions
     print_header "FACTORY RESET (Optional)"

@@ -1,0 +1,5 @@
+# Local ZMK config clone (use setup-zmk.sh to recreate)
+glove80-zmk-config/
+
+# Firmware binaries (downloaded after build)
+firmware/*.uf2
