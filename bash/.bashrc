@@ -9,3 +9,7 @@ source ~/.local/share/omarchy/default/bash/rc
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
+
+# Claude Code
+alias c='npx "@anthropic-ai/claude-code"'
+alias cc='npx "@anthropic-ai/claude-code" resume'
