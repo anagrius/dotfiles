@@ -10,6 +10,15 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 
+# Editor (omarchy sets this in uwsm/default but that only applies to UWSM session, not shells)
+source ~/.config/uwsm/default
+
 # Claude Code
 alias c='npx "@anthropic-ai/claude-code"'
 alias cc='npx "@anthropic-ai/claude-code" resume'
+
+# opencode
+export PATH=/home/thomas/.opencode/bin:$PATH
+
+# mise activation
+eval "$(mise activate bash)"
