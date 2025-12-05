@@ -30,5 +30,5 @@ return {
     dependencies = {},
   },
   -- Disable mini-starter if present
-  { "echasnovski/mini.starter", enabled = false },
+  { "nvim-mini/mini.starter", enabled = false },
 }
