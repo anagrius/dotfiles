@@ -1,0 +1,64 @@
+// US QWERTY with Nordic character extensions
+// Provides Danish characters with LAlt and Swedish with RAlt
+//
+// Installation:
+//   sudo cp us-nordic /usr/share/X11/xkb/symbols/
+//   setxkbmap us-nordic
+
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+
+    include "us(basic)"
+    name[Group1]= "English (US) with Nordic extensions";
+
+    // Define key types for our custom modifier levels
+    key <AC10> {  // semicolon key
+        [ semicolon, colon, ae, adiaeresis, AE, Adiaeresis ]
+    };
+
+    key <AC11> {  // apostrophe key
+        [ apostrophe, quotedbl, oslash, odiaeresis, Oslash, Odiaeresis ]
+    };
+
+    key <AD11> {  // left bracket key
+        [ bracketleft, braceleft, aring, aring, Aring, Aring ]
+    };
+
+    // Enable RAlt as AltGr (Level 3) and LAlt as Level 5
+    include "level3(ralt_switch)"
+
+    // Note: Using LAlt for input may conflict with window manager shortcuts
+    // Consider using RAlt for both Danish and Swedish, or remapping compose key
+};
+
+// Alternative: All Nordic chars on RAlt only (to avoid LAlt conflicts)
+xkb_symbols "ralt_only" {
+
+    include "us(basic)"
+    name[Group1]= "English (US) with Nordic on RAlt";
+
+    // All Nordic characters accessible via RAlt
+    // RAlt+; through RAlt+Shift+' cycles through Danish then Swedish
+
+    key <AC10> {  // semicolon: RAlt=æ, RAlt+Shift=Æ
+        [ semicolon, colon, ae, AE ]
+    };
+
+    key <AC11> {  // apostrophe: RAlt=ø, RAlt+Shift=Ø
+        [ apostrophe, quotedbl, oslash, Oslash ]
+    };
+
+    key <AD11> {  // left bracket: RAlt=å, RAlt+Shift=Å
+        [ bracketleft, braceleft, aring, Aring ]
+    };
+
+    key <AD12> {  // right bracket: RAlt=ä, RAlt+Shift=Ä
+        [ bracketright, braceright, adiaeresis, Adiaeresis ]
+    };
+
+    key <BKSL> {  // backslash: RAlt=ö, RAlt+Shift=Ö
+        [ backslash, bar, odiaeresis, Odiaeresis ]
+    };
+
+    include "level3(ralt_switch)"
+};

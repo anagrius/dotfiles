@@ -1,0 +1,44 @@
+
+// US QWERTY with Nordic character extensions
+// All Nordic characters on Right-Alt only
+
+partial alphanumeric_keys
+xkb_symbols "nordic" {
+
+    include "us(basic)"
+    name[Group1]= "English (US) with Nordic";
+
+    // Use standard 4-level key type (normal, Shift, RAlt, RAlt+Shift)
+
+    // Semicolon: RAlt=æ/Æ (Danish)
+    key <AC10> {
+        type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1] = [ semicolon, colon, ae, AE ]
+    };
+
+    // Apostrophe: RAlt=ø/Ø (Danish)
+    key <AC11> {
+        type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1] = [ apostrophe, quotedbl, oslash, Oslash ]
+    };
+
+    // Left bracket: RAlt=å/Å (Danish/Swedish)
+    key <AD11> {
+        type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1] = [ bracketleft, braceleft, aring, Aring ]
+    };
+
+    // Right bracket: RAlt=ä/Ä (Swedish)
+    key <AD12> {
+        type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1] = [ bracketright, braceright, adiaeresis, Adiaeresis ]
+    };
+
+    // Backslash: RAlt=ö/Ö (Swedish)
+    key <BKSL> {
+        type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1] = [ backslash, bar, odiaeresis, Odiaeresis ]
+    };
+
+    include "level3(ralt_switch)"
+};

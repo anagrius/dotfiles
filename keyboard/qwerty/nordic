@@ -1,0 +1,41 @@
+// Custom Nordic keyboard layout
+// Left-Alt + keys give Danish characters (æ, ø, å)
+// Right-Alt + keys give Swedish characters (ä, ö, å)
+//
+// Usage: Place in /usr/share/X11/xkb/symbols/ and activate with:
+// setxkbmap -layout nordic
+
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+
+    include "us(basic)"
+    name[Group1]= "English (US, Nordic extensions)";
+
+    // Danish characters with Left Alt (LAlt/Mod1)
+    // Swedish characters with Right Alt (AltGr/ISO_Level3_Shift)
+
+    // Semicolon key: LAlt+; = æ, RAlt+; = ä
+    key <AC10> {
+        type= "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1]= [ semicolon, colon, ae, adiaeresis ]
+    };
+
+    // Apostrophe key: LAlt+' = ø, RAlt+' = ö
+    key <AC11> {
+        type= "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1]= [ apostrophe, quotedbl, oslash, odiaeresis ]
+    };
+
+    // Left bracket key: LAlt+[ = å, RAlt+[ = å
+    key <AD11> {
+        type= "FOUR_LEVEL_ALPHABETIC",
+        symbols[Group1]= [ bracketleft, braceleft, aring, aring ]
+    };
+
+    // Capital versions
+    // Semicolon with shift: LAlt+Shift+; = Æ, RAlt+Shift+; = Ä
+    // These are handled by FOUR_LEVEL_ALPHABETIC type
+
+    include "level3(ralt_switch)"
+    include "level5(lalt_switch)"
+};

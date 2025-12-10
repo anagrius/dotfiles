@@ -1,0 +1,37 @@
+# XCompose configuration for Nordic characters
+# Copy to ~/.XCompose
+# This allows typing Danish and Swedish characters using compose sequences
+
+include "%L"
+
+# Danish characters (using Left Alt would require different approach)
+# Using compose key instead (typically Right Alt or other configured key)
+
+# Alternative: Multi_key sequences for Danish
+<Multi_key> <a> <e>              : "æ"   ae
+<Multi_key> <A> <E>              : "Æ"   AE
+<Multi_key> <o> <e>              : "ø"   oslash
+<Multi_key> <O> <E>              : "Ø"   Oslash
+<Multi_key> <a> <a>              : "å"   aring
+<Multi_key> <A> <A>              : "Å"   Aring
+
+# Swedish characters
+<Multi_key> <a> <quotedbl>       : "ä"   adiaeresis
+<Multi_key> <A> <quotedbl>       : "Ä"   Adiaeresis
+<Multi_key> <o> <quotedbl>       : "ö"   odiaeresis
+<Multi_key> <O> <quotedbl>       : "Ö"   Odiaeresis
+
+# Alternative shorter sequences
+<Multi_key> <semicolon> <d>      : "æ"   ae        # Danish æ
+<Multi_key> <colon> <D>          : "Æ"   AE
+<Multi_key> <apostrophe> <d>     : "ø"   oslash    # Danish ø
+<Multi_key> <quotedbl> <D>       : "Ø"   Oslash
+<Multi_key> <bracketleft> <d>    : "å"   aring     # Danish å
+<Multi_key> <braceleft> <D>      : "Å"   Aring
+
+<Multi_key> <semicolon> <s>      : "ä"   adiaeresis # Swedish ä
+<Multi_key> <colon> <S>          : "Ä"   Adiaeresis
+<Multi_key> <apostrophe> <s>     : "ö"   odiaeresis # Swedish ö
+<Multi_key> <quotedbl> <S>       : "Ö"   Odiaeresis
+<Multi_key> <bracketleft> <s>    : "å"   aring      # Swedish å
+<Multi_key> <braceleft> <S>      : "Å"   Aring
