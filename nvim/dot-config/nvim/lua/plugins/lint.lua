@@ -1,58 +1,29 @@
--- Custom nvim-lint configuration to disable markdownlint for Mason files
--- and use global markdownlint configuration
-local HOME = os.getenv("HOME")
-
+-- Disable all markdown linting (overrides lazyvim markdown extra)
 return {
   {
     "mfussenegger/nvim-lint",
     opts = {
-      linters = {
-        markdownlint = {
-          args = { "--config", HOME .. "/.markdownlint.json", "--" },
-          condition = function(ctx)
-            -- Disable markdownlint for Mason-related markdown files
-            local mason_patterns = {
-              "mason%.nvim",
-              "williamboman/mason",
-              "mason%-lspconfig",
-              "mason%-tool%-installer",
-              "registry%.lua",
-              "%.mason",
-              "/mason/",
-            }
-            
-            for _, pattern in ipairs(mason_patterns) do
-              if string.find(ctx.filename, pattern) then
-                return false
-              end
-            end
-            
-            return true
-          end,
-        },
-        ["markdownlint-cli2"] = {
-          args = { "--config", HOME .. "/.markdownlint.json", "--" },
-          condition = function(ctx)
-            -- Disable markdownlint-cli2 for Mason-related markdown files
-            local mason_patterns = {
-              "mason%.nvim",
-              "williamboman/mason",
-              "mason%-lspconfig", 
-              "mason%-tool%-installer",
-              "registry%.lua",
-              "%.mason",
-              "/mason/",
-            }
-            
-            for _, pattern in ipairs(mason_patterns) do
-              if string.find(ctx.filename, pattern) then
-                return false
-              end
-            end
-            
-            return true
-          end,
-        },
+      linters_by_ft = {
+        markdown = {},
+      },
+    },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.sources = vim.tbl_filter(function(source)
+        return source.name ~= "markdownlint_cli2"
+      end, opts.sources or {})
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        ["markdown"] = { "prettier", "markdown-toc" },
+        ["markdown.mdx"] = { "prettier", "markdown-toc" },
       },
     },
   },
