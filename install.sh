@@ -37,6 +37,11 @@ PACKAGES=(
 
     # CLI utilities
     tree         # Directory listing
+
+    # Security
+    trufflehog-bin # Secret scanning (pre-push hook)
+    sops           # Encrypted secrets management
+    age            # Encryption backend for sops
 )
 
 info "Installing packages..."

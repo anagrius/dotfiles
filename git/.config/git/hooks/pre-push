@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Pre-push hook: scan for secrets with trufflehog before pushing
+
+if ! command -v trufflehog &>/dev/null; then
+  echo "WARNING: trufflehog not installed, skipping secret scan"
+  echo "  Install: yay -S trufflehog-bin"
+  exit 0
+fi
+
+remote="$1"
+
+# Scan only the commits being pushed (read from stdin)
+while read -r local_ref local_oid remote_ref remote_oid; do
+  # Skip delete pushes
+  if [ "$local_oid" = "0000000000000000000000000000000000000000" ]; then
+    continue
+  fi
+
+  # For new branches, scan all commits not on remote
+  if [ "$remote_oid" = "0000000000000000000000000000000000000000" ]; then
+    range="$local_oid"
+  else
+    range="$remote_oid..$local_oid"
+  fi
+
+  echo "Scanning for secrets in $local_ref..."
+  results=$(trufflehog git "file://$(git rev-parse --show-toplevel)" --since-commit "$range" --no-update --fail 2>&1)
+  exit_code=$?
+
+  if [ $exit_code -ne 0 ]; then
+    echo ""
+    echo "PUSH BLOCKED: trufflehog found potential secrets!"
+    echo ""
+    echo "$results"
+    echo ""
+    echo "If this is a false positive, push with: git push --no-verify"
+    exit 1
+  fi
+done
+
+exit 0
