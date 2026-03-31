@@ -24,7 +24,7 @@ while read -r local_ref local_oid remote_ref remote_oid; do
   fi
 
   echo "Scanning for secrets in $local_ref..."
-  results=$(trufflehog git "file://$(git rev-parse --show-toplevel)" --since-commit "$range" --no-update --fail 2>&1)
+  results=$(trufflehog git "file://$(git rev-parse --show-toplevel)" --since-commit "$range" --fail 2>&1)
   exit_code=$?
 
   if [ $exit_code -ne 0 ]; then
