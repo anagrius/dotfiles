@@ -47,4 +47,13 @@ PACKAGES=(
 info "Installing packages..."
 yay -S --needed --noconfirm "${PACKAGES[@]}"
 
+# Framework 16 sleep hook (keyboard LEDs off during sleep)
+SLEEP_HOOK="keyboard/framework16/framework-sleep-devices.sh"
+SLEEP_HOOK_DEST="/usr/lib/systemd/system-sleep/framework-sleep-devices.sh"
+if [[ -f "$SLEEP_HOOK" ]]; then
+    info "Installing Framework 16 sleep hook..."
+    sudo cp "$SLEEP_HOOK" "$SLEEP_HOOK_DEST"
+    sudo chmod +x "$SLEEP_HOOK_DEST"
+fi
+
 info "Done! Run 'stow <package>' to install dotfiles."
