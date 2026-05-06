@@ -1,0 +1,17 @@
+{
+  "active": "dev",
+  "profiles": {
+    "dev": {
+      "endpoint": "http://query-service.bzrk.svc.cluster.local:9510"
+    },
+    "local": {
+      "endpoint": "http://localhost:9510"
+    },
+    "docker": {
+      "endpoint": "http://host.docker.internal:9510"
+    },
+    "prod": {
+      "endpoint": "http://query-service:9510"
+    }
+  }
+}

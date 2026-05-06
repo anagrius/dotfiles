@@ -1,0 +1,13 @@
+active = "dev"
+
+[profiles.dev]
+endpoint = "http://query.bzrk.svc.cluster.local:9510"
+username = "thomas.anagrius@bzrk.dev"
+
+[profiles.local]
+endpoint = "http://localhost:9510"
+username = "thomas.anagrius@bzrk.dev"
+
+[profiles.ui-local]
+endpoint = "http://localhost:3000"
+username = "thomas.anagrius@bzrk.dev"
