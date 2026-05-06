@@ -95,6 +95,9 @@ gwd() {
   git worktree remove "$dir" && echo "Removed worktree: $dir"
 }
 
+# Taskwarrior TUI shortcut
+alias td='taskwarrior-tui'
+
 # peon-ping quick controls
 alias peon="bash /home/thomas/.claude/hooks/peon-ping/peon.sh"
 [ -f /home/thomas/.claude/hooks/peon-ping/completions.bash ] && source /home/thomas/.claude/hooks/peon-ping/completions.bash
