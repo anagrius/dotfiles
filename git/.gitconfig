@@ -1,0 +1,40 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	new-branch = "\\!f() { [ -z \"$1\" ] && echo \"Branch name required\" && exit 1; git diff-index --quiet HEAD -- || (echo \"Error: Uncommitted changes in workspace\" && exit 1); git fetch origin && git checkout -b \"$1\" origin/master; }; f"
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
+[user]
+	name = Thomas Anagrius
+	email = thomas@bzrk.dev
+	signingkey = 8F8F72BB076F6C9E
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[core]
+	autocrlf = input
+	editor = nvim
+	hooksPath = /home/thomas/.config/git/hooks
+[push]
+	autoSetupRemote = true
+[gitbutler]
+	aiModelProvider = anthropic
+	aiAnthropicKeyOption = butlerAPI
+	aiAnthropicModelName = claude-sonnet-4-0
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[safe]
+	directory = /tmp/berserk-library
+	directory = /home/thomas/foo/wiki
+[commit]
+	gpgsign = true
