@@ -17,7 +17,7 @@ help:
 	@echo "Packages: $(PACKAGES)"
 
 stow:
-	stow $(STOW_FLAGS) $(PACKAGES)
+	@./scripts/safe-stow.sh $(PACKAGES)
 	@$(MAKE) --no-print-directory secrets
 
 unstow:
@@ -27,10 +27,19 @@ restow:
 	stow -R $(STOW_FLAGS) $(PACKAGES)
 
 secrets:
-	@echo "Decrypting secrets to ~/.secrets..."
-	@sops decrypt --input-type dotenv --output-type dotenv secrets.enc.env | sed 's/^/export /' > ~/.secrets
-	@chmod 600 ~/.secrets
-	@echo "Done."
+	@if [ ! -f ~/.config/sops/age/keys.txt ]; then \
+		echo "Skipping secrets: age key not found at ~/.config/sops/age/keys.txt"; \
+		echo "  Run 'pass-cli login && make secrets-restore-key' to restore it,"; \
+		echo "  then re-run 'make secrets'."; \
+	else \
+		echo "Decrypting secrets to ~/.secrets..."; \
+		sops decrypt --input-type dotenv --output-type dotenv secrets.enc.env \
+			| sed 's/^/export /' > ~/.secrets.tmp \
+			&& mv ~/.secrets.tmp ~/.secrets \
+			&& chmod 600 ~/.secrets \
+			&& echo "Done." \
+			|| { rm -f ~/.secrets.tmp; echo "Decryption failed."; exit 1; }; \
+	fi
 
 secrets-edit:
 	EDITOR=$${EDITOR:-nvim} sops edit --input-type dotenv --output-type dotenv secrets.enc.env

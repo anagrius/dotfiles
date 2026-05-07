@@ -3,6 +3,8 @@ set -euo pipefail
 
 # Thomas Anagrius's Arch Linux setup script
 
+cd "$(dirname "$0")"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
@@ -32,6 +34,9 @@ fi
 
 # Packages to install
 PACKAGES=(
+    # Dotfiles management
+    stow         # Symlink farm manager (required by `make stow`)
+
     # Version control
     jujutsu      # jj - Git-compatible VCS
 
@@ -42,6 +47,9 @@ PACKAGES=(
     trufflehog-bin # Secret scanning (pre-push hook)
     sops           # Encrypted secrets management
     age            # Encryption backend for sops
+
+    # Communication
+    vesktop-bin    # Discord client (Vencord pre-installed)
 )
 
 info "Installing packages..."
