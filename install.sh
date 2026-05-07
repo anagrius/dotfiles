@@ -39,6 +39,7 @@ PACKAGES=(
 
     # Version control
     jujutsu      # jj - Git-compatible VCS
+    git-lfs      # Git Large File Storage
 
     # CLI utilities
     tree         # Directory listing
