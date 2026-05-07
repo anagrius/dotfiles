@@ -11,7 +11,6 @@
 [user]
 	name = Thomas Anagrius
 	email = thomas@bzrk.dev
-	signingkey = 8F8F72BB076F6C9E
 [credential "https://github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
@@ -36,5 +35,3 @@
 [safe]
 	directory = /tmp/berserk-library
 	directory = /home/thomas/foo/wiki
-[commit]
-	gpgsign = true
