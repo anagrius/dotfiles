@@ -8,7 +8,18 @@ url="$2"
 stdin_input="$(cat)"
 
 # --- trufflehog secret scan -------------------------------------------------
-if ! command -v trufflehog &>/dev/null; then
+# Arch's trufflehog-bin 3.95.2-1 ships a wrapper at /usr/bin/trufflehog that
+# execs the wrong path (/usr/lib/trufflehog-bin/ vs the real /usr/lib/trufflehog/).
+# Prefer the real binary when it's there.
+if [ -x /usr/lib/trufflehog/trufflehog ]; then
+  TRUFFLEHOG=/usr/lib/trufflehog/trufflehog
+elif command -v trufflehog &>/dev/null; then
+  TRUFFLEHOG=trufflehog
+else
+  TRUFFLEHOG=""
+fi
+
+if [ -z "$TRUFFLEHOG" ]; then
   echo "WARNING: trufflehog not installed, skipping secret scan"
   echo "  Install: yay -S trufflehog-bin"
 else
@@ -26,7 +37,7 @@ else
     fi
 
     echo "Scanning for secrets in $local_ref..."
-    results=$(trufflehog git "file://$(git rev-parse --show-toplevel)" --since-commit "$range" --fail 2>&1)
+    results=$("$TRUFFLEHOG" --no-update git "file://$(git rev-parse --show-toplevel)" --since-commit "$range" --fail 2>&1)
     exit_code=$?
 
     if [ $exit_code -ne 0 ]; then
