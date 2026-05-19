@@ -1,0 +1,31 @@
+[accounts.gmail]
+default = true
+email = "borlum@gmail.com"
+
+[accounts.gmail.folder.alias]
+inbox = "INBOX"
+sent = "[Gmail]/Sent Mail"
+drafts = "[Gmail]/Drafts"
+trash = "[Gmail]/Trash"
+
+[accounts.gmail.backend]
+type = "imap"
+host = "imap.gmail.com"
+port = 993
+encryption.type = "tls"
+login = "borlum@gmail.com"
+
+[accounts.gmail.backend.auth]
+type = "password"
+cmd = "pass-cli item view --vault-name Personal --item-title 'Gmail IMAP App Password (himalaya)' --field password"
+
+[accounts.gmail.message.send.backend]
+type = "smtp"
+host = "smtp.gmail.com"
+port = 465
+encryption.type = "tls"
+login = "borlum@gmail.com"
+
+[accounts.gmail.message.send.backend.auth]
+type = "password"
+cmd = "pass-cli item view --vault-name Personal --item-title 'Gmail IMAP App Password (himalaya)' --field password"

@@ -2,7 +2,7 @@
 
 # Stow packages with dotfiles support
 STOW_FLAGS = --dotfiles -v
-PACKAGES = bash bzrk claude-skills git hypr keyboard nvim wireplumber
+PACKAGES = bash bzrk claude-skills git himalaya hypr keyboard nvim wireplumber
 
 help:
 	@echo "Dotfiles Management"
